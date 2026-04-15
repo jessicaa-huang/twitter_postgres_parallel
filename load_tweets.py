@@ -353,7 +353,7 @@ def insert_tweet(connection, tweet):
             'type': medium['type'],
         })
 
-    connection.commit()
+
 
 
 ################################################################################
@@ -375,6 +375,7 @@ if __name__ == '__main__':
         'application_name': 'load_tweets.py',
     })
     connection = engine.connect()
+    connection = connection.execution_options(isolation_level="AUTOCOMMIT")
 
     for filename in sorted(args.inputs, reverse=True):
         with zipfile.ZipFile(filename, 'r') as archive:
